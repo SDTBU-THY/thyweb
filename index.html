@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片展示网站</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>我的图片展示</h1>
+    </header>
+    
+    <div class="gallery" id="gallery">
+        <!-- 图片将通过 JavaScript 动态添加 -->
+    </div>
+
+    <script>
+        // 图片数据
+        const images = [
+            {
+                src: "images/thy.jpg",
+                title: "图片标题1",
+                description: "图片描述1"
+            },
+            {
+                src: "images/thy2.jpg",
+                title: "新图片",
+                description: "这是新添加的图片"
+            }
+        ];
+
+        // 创建单个图片卡片的函数
+        function createImageCard(image) {
+            const card = document.createElement('div');
+            card.className = 'image-card';
+            
+            // 添加加载动画
+            card.innerHTML = `
+                <div class="loading-spinner"></div>
+                <img src="${image.src}" alt="${image.title}" style="display: none">
+                <div class="image-description">
+                    <h3>${image.title}</h3>
+                    <p>${image.description}</p>
+                </div>
+            `;
+
+            const img = card.querySelector('img');
+            const spinner = card.querySelector('.loading-spinner');
+
+            // 图片加载完成后显示
+            img.onload = () => {
+                console.log('图片加载成功:', image.src);
+                spinner.style.display = 'none';
+                img.style.display = 'block';
+            };
+
+            // 图片加载失败时显示替代内容
+            img.onerror = () => {
+                console.log('图片加载失败:', image.src);
+                spinner.style.display = 'none';
+                img.src = 'images/error-placeholder.jpg';
+                img.style.display = 'block';
+            };
+
+            return card;
+        }
+
+        // 添加图片到画廊
+        const gallery = document.getElementById('gallery');
+        images.forEach(image => {
+            gallery.appendChild(createImageCard(image));
+        });
+    </script>
+</body>
+</html>
