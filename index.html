@@ -3,69 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>图片展示网站</title>
+    <title>我的个人博客</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>我的图片展示</h1>
+        <h1>我的博客空间</h1>
+        <p class="subtitle">分享我的想法和经历</p>
     </header>
     
-    <div class="gallery" id="gallery">
-        <!-- 图片将通过 JavaScript 动态添加 -->
+    <div class="container">
+        <main class="blog-posts">
+            <article class="blog-post">
+                <h2>我的第一篇博客</h2>
+                <div class="post-meta">
+                    <span class="date">2024-01-20</span>
+                    <span class="category">生活随笔</span>
+                </div>
+                <div class="post-content">
+                    <p>这是我的第一篇博客文章。在这里，我将分享我的想法和经历。</p>
+                    <p>欢迎来到我的博客空间！</p>
+                </div>
+            </article>
+
+            <article class="blog-post">
+                <h2>学习笔记</h2>
+                <div class="post-meta">
+                    <span class="date">2024-01-19</span>
+                    <span class="category">学习</span>
+                </div>
+                <div class="post-content">
+                    <p>今天学习了很多新知识，记录一下学习心得。</p>
+                    <p>持续学习，不断进步！</p>
+                </div>
+            </article>
+        </main>
+
+        <aside class="sidebar">
+            <div class="about-me">
+                <h3>关于我</h3>
+                <p>你好，欢迎来到我的博客！</p>
+            </div>
+            <div class="categories">
+                <h3>分类</h3>
+                <ul>
+                    <li>生活随笔</li>
+                    <li>学习笔记</li>
+                    <li>技术分享</li>
+                </ul>
+            </div>
+        </aside>
     </div>
 
-    <script>
-        // 图片数据
-        const images = [
-            {
-                src: "images/thy.jpg",
-                title: "图片标题1",
-                description: "图片描述1"
-            }
-        ];
-
-        // 创建单个图片卡片的函数
-        function createImageCard(image) {
-            const card = document.createElement('div');
-            card.className = 'image-card';
-            
-            // 添加加载动画
-            card.innerHTML = `
-                <div class="loading-spinner"></div>
-                <img src="${image.src}" alt="${image.title}" style="display: none">
-                <div class="image-description">
-                    <h3>${image.title}</h3>
-                    <p>${image.description}</p>
-                </div>
-            `;
-
-            const img = card.querySelector('img');
-            const spinner = card.querySelector('.loading-spinner');
-
-            // 图片加载完成后显示
-            img.onload = () => {
-                console.log('图片加载成功:', image.src);
-                spinner.style.display = 'none';
-                img.style.display = 'block';
-            };
-
-            // 图片加载失败时显示替代内容
-            img.onerror = () => {
-                console.log('图片加载失败:', image.src);
-                spinner.style.display = 'none';
-                img.src = 'images/error-placeholder.jpg';
-                img.style.display = 'block';
-            };
-
-            return card;
-        }
-
-        // 添加图片到画廊
-        const gallery = document.getElementById('gallery');
-        images.forEach(image => {
-            gallery.appendChild(createImageCard(image));
-        });
-    </script>
+    <footer>
+        <p>&copy; 2024 我的博客. All rights reserved.</p>
+    </footer>
 </body>
 </html>
